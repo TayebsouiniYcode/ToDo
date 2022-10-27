@@ -1,13 +1,14 @@
 package com.example.todolistjakartaee9.service.implementation;
 
 import com.example.todolistjakartaee9.entity.Users;
+import com.example.todolistjakartaee9.repository.UserRepository;
 import com.example.todolistjakartaee9.service.UsersService;
 import com.example.todolistjakartaee9.repository.implementation.UserRepositoryImp;
 
 import java.util.ArrayList;
 
 public class UsersServiceImp implements UsersService {
-    private UserRepositoryImp userReposiroty = new UserRepositoryImp ();
+    UserRepository userReposiroty = new UserRepositoryImp ();
 
     @Override
     public int login(String email, String password) {

@@ -1,5 +1,6 @@
 package com.example.todolistjakartaee9.controller;
 
+import com.example.todolistjakartaee9.service.UsersService;
 import com.example.todolistjakartaee9.service.implementation.UsersServiceImp;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -10,7 +11,7 @@ import com.example.todolistjakartaee9.entity.Users;
 
 @WebServlet(name = "RegisterServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
-    UsersServiceImp userService = new UsersServiceImp ();
+    UsersService userService = new UsersServiceImp ();
     @Override
     protected void doGet ( HttpServletRequest request , HttpServletResponse response ) throws ServletException, IOException {
         request.getRequestDispatcher ( "register.jsp" ).forward ( request, response );

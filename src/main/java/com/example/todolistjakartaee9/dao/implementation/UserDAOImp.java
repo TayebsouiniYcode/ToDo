@@ -10,31 +10,26 @@ public class UserDAOImp implements UserDAO {
 
     @Override
     public Users add ( String firstname , String lastname , String username , String password ) {
-        System.out.println ("7" );
         EntityManagerFactory emf;
-        System.out.println ("7,5" );
         emf = Persistence.createEntityManagerFactory ( "todoPersistence" );
-        System.out.println ("8" );
         EntityManager entityManager = emf.createEntityManager();
-        System.out.println ("9" );
 
         Users user = new Users ();
         user.setFirstname(firstname);
         user.setLastname(lastname);
         user.setUsername ( username );
         user.setPassword ( password );
-        System.out.println ("10" );
-        entityManager.getTransaction().begin();
-        System.out.println ("11" );
-        entityManager.persist ( user );
-        System.out.println ("12" );
-        entityManager.getTransaction().commit();
-        System.out.println ("13" );
-        entityManager.close ();
-        System.out.println ("14" );
-        emf.close ();
-        System.out.println ("15" );
 
-        return user;
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist ( user );
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction ().rollback ();
+        } finally {
+            entityManager.close ();
+            emf.close ();
+            return user;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.todolistjakartaee9.repository.implementation;
 
+import com.example.todolistjakartaee9.dao.UserDAO;
 import com.example.todolistjakartaee9.entity.Users;
 import com.example.todolistjakartaee9.repository.UserRepository;
 import com.example.todolistjakartaee9.repository.implementation.UserRepositoryImp;
@@ -14,7 +15,7 @@ import com.example.todolistjakartaee9.repository.implementation.UserRepositoryIm
 // --------------------------------------------
 
 public class UserRepositoryImp implements UserRepository {
-    UserDAOImp userDAO = new UserDAOImp ();
+    UserDAO userDAO = new UserDAOImp ();
 
     @Override
     public int login(String email, String password) {
