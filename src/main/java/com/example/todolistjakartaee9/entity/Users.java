@@ -1,34 +1,49 @@
 package com.example.todolistjakartaee9.entity;
 
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-//import org.hibernate.annotations.DynamicUpdate;
-
-import com.example.todolistjakartaee9.entity.Role;
-
-
 @Entity
-//@DynamicUpdate
-@Table(schema = "public", name = "Users")
+@Table(name = "Users")
 public class Users {
 
-    @NotNull
     @Id
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @NotNull(message = "email doesn't take a null value")
-    @Column(name = "username")
-    private String username;
-    @Column(name = "password")
-    private String password;
+    private long id;
+
+    @NotNull(message = "firstname doesn't take a null value")
     @Column(name = "firstname")
     private String firstname;
+
+    @NotNull(message = "last_name doesn't take a null value")
     @Column(name = "lastname")
     private String lastname;
-    //private Role role;
 
+
+
+    @Column(unique = true, nullable = false)
+    @NotNull(message = "username doesn't take a null value")
+    private String username;
+
+    @NotNull(message = "password doesn't take a null value")
+    @Column(name = "password")
+    private String password;
+
+
+
+    public Users() {}
+    public Users ( String firstname , String lastname , String email , String phone , String username , String password ) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.password = password;
+    }
+
+    public long getId ( ) {
+        return id;
+    }
 
     public String getFirstname ( ) {
         return firstname;
@@ -38,9 +53,6 @@ public class Users {
         return lastname;
     }
 
-    public int getId ( ) {
-        return id;
-    }
 
     public String getUsername ( ) {
         return username;
@@ -49,13 +61,17 @@ public class Users {
     public String getPassword ( ) {
         return password;
     }
-/*
-    public Role getRole() {
-        return role;
-    }
-*/
-    public void setId ( int id ) {
+
+    public void setId ( long id ) {
         this.id = id;
+    }
+
+    public void setFirstname ( String firstname ) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname ( String lastname ) {
+        this.lastname = lastname;
     }
 
     public void setUsername ( String username ) {
@@ -66,26 +82,14 @@ public class Users {
         this.password = password;
     }
 
-    public void setFirstname ( String firstname ) {
-        this.firstname = firstname;
-    }
-
-    public void setLastname ( String lastname ) {
-        this.lastname = lastname;
-    }
-    /*
-    public void setRole(Role role) {
-        this.role = role;
-    }*/
-/*
     @Override
     public String toString ( ) {
         return "Users{" +
                 "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", role=" + role +
                 '}';
     }
-    */
 }

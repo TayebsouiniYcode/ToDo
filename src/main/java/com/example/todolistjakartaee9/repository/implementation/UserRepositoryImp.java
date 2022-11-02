@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.example.todolistjakartaee9.dao.implementation.UserDAOImp;
 import com.example.todolistjakartaee9.repository.implementation.UserRepositoryImp;
+import jakarta.websocket.Session;
 
 
 // -------------------------------------------
@@ -18,20 +19,22 @@ public class UserRepositoryImp implements UserRepository {
     UserDAO userDAO = new UserDAOImp ();
 
     @Override
-    public int login(String email, String password) {
-        Users user = new UserRepositoryImp ().findByEmail(email);
-        System.out.println ( );
-        return  (user.getPassword().equals(password)) ? 1 : 2;
+    public int login(Users user) {
+        findByUsername(user.getUsername ());
+        return 0;
     }
 
     @Override
-    public Users register ( String firstname , String lastname , String username , String password ) {
-        System.out.println ("5" );
-        Users user;
-        System.out.println ("6" );
-        user = userDAO.add(firstname, lastname, username, password);
-        return user;
+    public int findByUsername ( String username ) {
+        return 1;
     }
+
+    @Override
+    public Users register ( Users user ) {
+        return userDAO.add(user);
+    }
+
+
 
     @Override
     public Users findByEmail ( String email ) {

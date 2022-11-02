@@ -5,7 +5,8 @@ import com.example.todolistjakartaee9.entity.Users;
 import java.util.ArrayList;
 
 public interface UserRepository {
-    int login(String email, String password);
-    Users register(String firstname, String lastname, String username, String password);
+    int login(Users user);
+    int findByUsername(String username);
+    Users register(Users user);
     Users findByEmail(String email);
 }

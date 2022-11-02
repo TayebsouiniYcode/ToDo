@@ -1,5 +1,7 @@
 package com.example.todolistjakartaee9.controller;
 
+import com.example.todolistjakartaee9.entity.Users;
+import com.example.todolistjakartaee9.service.UsersService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -9,10 +11,10 @@ import java.io.IOException;
 
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
-    private UsersServiceImp userServiceImp;
+    UsersService userService;
 
     public void init() {
-        userServiceImp = new UsersServiceImp ();
+        userService = new UsersServiceImp ();
     }
 
     @Override
@@ -22,21 +24,23 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost ( HttpServletRequest request , HttpServletResponse response ) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = request.getParameter ( "username" );
+        String password = request.getParameter ( "password" );
 
-        if (userServiceImp.login(username, password) == 1) {
-            System.out.println ("true" );
-            /*int id = new UsersServiceImp ().findByEmail(username).getUserId();
-            HttpSession session = request.getSession();
-            session.setAttribute("id" , id );
+        System.out.println ("username : " + username + " password : "  + password);
 
-            response.sendRedirect("/login");*/
-        } else {
-            System.out.println ("false" );
-            /*RequestDispatcher requestDispatcher =request.getRequestDispatcher("login.jsp");
-            requestDispatcher.include(request,response);
-            response.sendRedirect("/");*/
+        Users user = new Users ();
+
+        user.setUsername ( username );
+        user.setPassword ( password );
+
+        if (userService.login (user) == 1 ) {
+            System.out.println ("connect" );
+        }else {
+            System.out.println ("user not found" );
         }
+
+        System.out.println (user.toString () );
+
     }
 }

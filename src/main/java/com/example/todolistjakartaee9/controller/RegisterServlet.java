@@ -10,6 +10,7 @@ import java.io.IOException;
 import com.example.todolistjakartaee9.entity.Users;
 
 @WebServlet(name = "RegisterServlet", value = "/register")
+//@WebServlet(name = "RegisterServlet", value = {"/login", "/register"})
 public class RegisterServlet extends HttpServlet {
     UsersService userService = new UsersServiceImp ();
     @Override
@@ -20,14 +21,21 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost ( HttpServletRequest request , HttpServletResponse response ) throws ServletException, IOException {
-        System.out.println ("1" );
         String firstname = request.getParameter ( "firstname" );
         String lastname = request.getParameter ( "lastname" );
         String username = request.getParameter ( "username");
         String password = request.getParameter ( "password");
-        System.out.println ("2" );
-        userService.register(firstname, lastname, username, password);
 
+        Users user = new Users ();
+
+        user.setFirstname ( firstname );
+        user.setLastname ( lastname );
+        user.setUsername ( username );
+        user.setPassword ( password );
+
+        user = userService.register(user);
+
+        request.getRequestDispatcher ( "/home.jsp" ).forward ( request, response );
         //System.out.println ("Firstname: " + firstname + " lastname: " + lastname + " username :  " + username + "" +
         //        "password " + password);
     }

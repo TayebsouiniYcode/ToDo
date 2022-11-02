@@ -11,17 +11,12 @@ public class UsersServiceImp implements UsersService {
     UserRepository userReposiroty = new UserRepositoryImp ();
 
     @Override
-    public int login(String email, String password) {
-        return userReposiroty.login(email, password);
+    public int login(Users user){
+        return userReposiroty.login ( user );
     }
 
     @Override
-    public Users register ( String firstname , String lastname , String username , String password ) {
-        System.out.println ("3" );
-        Users user;
-        System.out.println ("4" );
-        user = userReposiroty.register(firstname, lastname, username, password);
-
-        return null;
+    public Users register ( Users user ) {
+        return userReposiroty.register(user);
     }
 }
